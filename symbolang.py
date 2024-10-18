@@ -33,14 +33,21 @@ class Language:
 
         self.running = True
         while self.running != False:
-            while self.direction == 'right' and self.running == True:
-                self.item_check(self.file_content[self.y][self.x])
-                print(self.file_content[self.y][self.x])
+            if self.direction == 'right' and self.running == True:
                 self.x += 1
-                if self.x >= len(self.file_content[self.y]):
-                    print('exiting.')
-                    self.running = False
-            self.running = False
+                self.item_check(self.file_content[self.y][self.x])
+                #print(self.file_content[self.y][self.x])
+
+
+            elif self.x >= len(self.file_content[self.y]):
+                self.throw_error('reached end of line. exiting.')        #self.running = False
+                self.running = False
+
+            elif self.direction == 'left' and self.running == True:
+                self.x -= 1
+                self.item_check(self.file_content[self.y][self.x])
+                #print(self.file_content[self.y][self.x])
+
 
             #for row in range(len(self.file_content)):
             #    for item in self.file_content[row]:
@@ -52,29 +59,35 @@ class Language:
         self.item = item
         if self.item == '>':
             self.direction = 'right'
-            print(self.direction)
+            print(self.direction, end=' ')
 
         elif self.item == 'v':
             self.direction = 'down'
-            print(self.direction)
+            print(self.direction, end=' ')
 
         elif self.item == '<':
             self.direction = 'left'
-            print(self.direction)
+            print(self.direction, end=' ')
 
         elif self.item == '^':
             self.direction = 'up'
-            print(self.direction)
+            print(self.direction, end=' ')
 
         elif self.item == '.':
-            print('sassy')
+            print('next-char', end=' ')
 
         elif self.item == '1':
-            print(1)
+            print(1, end=" ")
+
+        elif self.item == 'e':
+            self.throw_error('Reached end of program.')
 
         else:
-            print('ERROR! Unrecognised character!')
-            quit()
+            self.throw_error(f'ERROR! Unrecognised character! at char {self.x+1} and line {self.y+1}')
 
+
+    def throw_error(self, error):
+        print(error)
+        quit()
 
 Language(source)
