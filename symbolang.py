@@ -1,27 +1,24 @@
 
 
-source = 'hello.hi'
+#source = 'hello.symb'
 
-class Language:
-    def __init__(self, source):
-        #
+class Symbolang:
+    def __init__(self, source='none'):
         self.y = 0
         self.x = 0
         self.direction='right'
 
         self.running = False
-        self.source = source
-        self.file = open(source, 'r')
-        self.file_content = []
-        self.line_content = []
-        #self.row =
-
-        for line in self.file:
-            self.file_content.append(list(line.split()))#.append('\n'))
-
-        self.start_run()
-        #print(self.file_content)
-        #print(self.cursor['x'])
+        if source != 'none':
+            self.file_to_source_code(source)
+        else:
+            while True:
+                #Repl()
+                possible_file = input("Symbolang REPL (type source file) >>")
+                try:
+                    self.file_to_source_code(possible_file)
+                except FileNotFoundError:
+                    self.throw_error("That's not a valid file!")
 
     def start_run(self):
         self.direction = 'right'
@@ -36,7 +33,7 @@ class Language:
             if self.direction == 'right' and self.running == True:
                 self.x += 1
                 self.item_check(self.file_content[self.y][self.x])
-                #print(self.file_content[self.y][self.x])
+                print(self.file_content[self.y][self.x])
 
 
             elif self.x >= len(self.file_content[self.y]):
@@ -46,8 +43,16 @@ class Language:
             elif self.direction == 'left' and self.running == True:
                 self.x -= 1
                 self.item_check(self.file_content[self.y][self.x])
-                #print(self.file_content[self.y][self.x])
+                print(self.file_content[self.y][self.x])
 
+            #elif self.direction == 'down' and self.running == True:
+            #    self.y += 1
+            #    self.item_check(self.file_content[self.y][self.x])
+            #    print(self.file_content[self.y][self.x])
+
+            #elif self.y == len(self.file_content):
+            #    self.throw_error('reached end of line. exiting.')        #self.running = False
+            #    self.running = False
 
             #for row in range(len(self.file_content)):
             #    for item in self.file_content[row]:
@@ -90,4 +95,20 @@ class Language:
         print(error)
         quit()
 
-Language(source)
+
+    def file_to_source_code(self, file):
+        self.source = file
+        self.file = open(self.source+'.symb', 'r')
+        self.file_content = []
+        self.line_content = []
+        #self.row =
+
+        for line in self.file:
+            self.file_content.append(list(line.split()))#.append('\n'))
+
+        self.start_run()
+        #print(self.file_content)
+class Repl(Symbolang):
+    pass
+
+Symbolang()
