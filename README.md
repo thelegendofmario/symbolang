@@ -19,6 +19,6 @@ it will be able to move up and down too.)
 compiled language, but as of right now, it will not be compiled.
   * (or an interpreter written in a more portable
   language, instead of being interpreted to be interpreted.)
-* up and down movement of cursor
+* ~~up and down movement of cursor~~ <- completed
 * interactive REPL would be awesome
 * a [tulip](https://tulip.computer) port
