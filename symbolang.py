@@ -1,4 +1,4 @@
-
+import sys
 
 #source = 'hello.symb'
 
@@ -106,7 +106,18 @@ class Symbolang:
 
     def file_to_source_code(self, file):
         self.source = file
-        self.file = open(self.source+'.symb', 'r')
+        try:
+            if list(self.source.split('.'))[1] !=  'symb':
+                self.throw_error('invalid file extension')
+
+                #try:
+                #    self.file = open(self.source+'.symb', 'r')
+                #except FileNotFoundError:
+                #    self.throw_error('file not found (try adding a .symb to the end\nas the file extension)')
+            elif list(self.source.split('.'))[1] ==  'symb':
+                self.file = open(self.source, 'r')
+        except IndexError:
+            self.throw_error('no file extension')
         self.file_content = []
         self.line_content = []
         #self.row =
@@ -119,4 +130,9 @@ class Symbolang:
 class Repl(Symbolang):
     pass
 
-Symbolang()
+if __name__ == '__main__':
+    try:
+        Symbolang(sys.argv[1])
+    except IndexError:
+        print('You have to specify a file to open!!')
+        quit()

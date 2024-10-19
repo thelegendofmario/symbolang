@@ -1,19 +1,29 @@
 # Symbolang
+### a 2-dimensional, interpreted, programming language, inspired by [befunge](https://esolangs.org/wiki/Befunge)
 ## intro
-this is a 2-dimensional, interpreted, programming language, inspired by [befunge](https://esolangs.org/wiki/Befunge).
 
 The main concept of a Symbolang program is a 'pointer'. the pointer is the
 imaginary cursor that executes each character one by one. (right now it
 just supports left and right direction for the pointer, but eventually,
 it will be able to move up and down too.)
+
+## Variable scope
+
+This (will be) a stack based language, (at least for now)
+
+There aren't really any variables, but you will be able to push and pop values to and from the stack.
+
 ## Syntax
 | Symbol | Function |
 |---|--------------------------------------------|
-| > | Makes the 'pointer' start moving left      |
-| < | Makes the 'pointer' start moving right     |
+| > | Makes the pointer start moving left        |
+| < | Makes the pointer start moving right       |
+| ^ | Makes the pointer start moving up          |
+| v | Makes the pointer start moving down        |
 | . | skip, go to the next one                   |
 | 1 | Right now, this just prints the number '1' |
 
+Table of functions
 ## Roadmap
 * At some point, it would be AMAZING if this was eventually a
 compiled language, but as of right now, it will not be compiled.
