@@ -30,30 +30,38 @@ class Symbolang:
 
         self.running = True
         while self.running != False:
-            if self.direction == 'right' and self.running == True:
-                self.x += 1
-                self.item_check(self.file_content[self.y][self.x])
-                print(self.file_content[self.y][self.x])
+            try:
+                if self.direction == 'right' and self.running == True:
+                    self.x += 1
+                    self.item_check(self.file_content[self.y][self.x])
+                    #print(self.file_content[self.y][self.x])
 
 
-            elif self.x >= len(self.file_content[self.y]):
-                self.throw_error('reached end of line. exiting.')        #self.running = False
-                self.running = False
+                elif self.x >= len(self.file_content[self.y]):
+                    self.throw_error('reached end of line. exiting.')        #self.running = False
+                    self.running = False
 
-            elif self.direction == 'left' and self.running == True:
-                self.x -= 1
-                self.item_check(self.file_content[self.y][self.x])
-                print(self.file_content[self.y][self.x])
+                elif self.direction == 'left' and self.running == True:
+                    self.x -= 1
+                    self.item_check(self.file_content[self.y][self.x])
+                    #print(self.file_content[self.y][self.x])
 
-            #elif self.direction == 'down' and self.running == True:
-            #    self.y += 1
-            #    self.item_check(self.file_content[self.y][self.x])
-            #    print(self.file_content[self.y][self.x])
+                elif self.direction == 'down' and self.running == True:
+                    self.y += 1
+                    self.item_check(self.file_content[self.y][self.x])
+                    #print(self.file_content[self.y][self.x])
 
-            #elif self.y == len(self.file_content):
-            #    self.throw_error('reached end of line. exiting.')        #self.running = False
-            #    self.running = False
+                elif self.direction == 'up' and self.running == True:
+                    self.y -= 1
+                    self.item_check(self.file_content[self.y][self.x])
+                    #print(self.file_content[self.y][self.x])
 
+
+                elif self.y == len(self.file_content):
+                    self.throw_error('reached end of line. exiting.')        #self.running = False
+                    self.running = False
+            except KeyboardInterrupt:
+                self.throw_error('\n\nGot keyboard interrupt, exiting program...')
             #for row in range(len(self.file_content)):
             #    for item in self.file_content[row]:
             #        self.item_check(item)
@@ -64,19 +72,19 @@ class Symbolang:
         self.item = item
         if self.item == '>':
             self.direction = 'right'
-            print(self.direction, end=' ')
+            #print(self.direction, end=' ')
 
         elif self.item == 'v':
             self.direction = 'down'
-            print(self.direction, end=' ')
+            #print(self.direction, end=' ')
 
         elif self.item == '<':
             self.direction = 'left'
-            print(self.direction, end=' ')
+            #print(self.direction, end=' ')
 
         elif self.item == '^':
             self.direction = 'up'
-            print(self.direction, end=' ')
+            #print(self.direction, end=' ')
 
         elif self.item == '.':
             print('next-char', end=' ')
