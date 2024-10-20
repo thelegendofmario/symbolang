@@ -7,6 +7,7 @@ class Symbolang:
         self.y = 0
         self.x = 0
         self.direction='right'
+        self.stack = []
 
         self.running = False
         if source != 'none':
@@ -89,8 +90,13 @@ class Symbolang:
         elif self.item == '.':
             print('next-char', end=' ')
 
+        elif self.item == ',':
+            print(self.stack_pop())
+            print(self.stack)
+
         elif self.item == '1':
-            print(1, end=" ")
+            #print(1, end=" ")
+            self.stack_push(1)
 
         elif self.item == 'e':
             self.throw_error('Reached end of program.')
@@ -127,8 +133,13 @@ class Symbolang:
 
         self.start_run()
         #print(self.file_content)
-class Repl(Symbolang):
-    pass
+
+    def stack_push(self, value):
+        self.stack.append(value)
+
+    def stack_pop(self):
+        return self.stack.pop()
+
 
 if __name__ == '__main__':
     try:
