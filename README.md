@@ -25,7 +25,7 @@ There aren't really any variables, but you are able to push and pop values to an
 | 1-9            | pushes corresponding value to stack      |
 | /, *, +, or -  | pop two values from stack (a, then b), and then performs the operation on a and b and pushes result to stack.|
 | I              | (CAPITAL I) gets a number or character from user, and pushes it to the stack.                                |
-<nvm>
+
 Table of functions
 ## Roadmap
 * At some point, it would be AMAZING if this had an t=interpreter in a compiled
