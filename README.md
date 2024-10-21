@@ -11,24 +11,25 @@ it will be able to move up and down too.)
 
 This (will be) a stack based language, (at least for now)
 
-There aren't really any variables, but you will be able to push and pop values to and from the stack.
+There aren't really any variables, but you are able to push and pop values to and from the stack.
 
 ## Syntax
 | Symbol | Function |
 |---|--------------------------------------------|
-| > | Makes the pointer start moving left        |
-| < | Makes the pointer start moving right       |
-| ^ | Makes the pointer start moving up          |
-| v | Makes the pointer start moving down        |
-| . | skip, go to the next one                   |
-| 1 | Right now, this just prints the number '1' |
-
+| >              | Makes the pointer start moving left      |
+| <              | Makes the pointer start moving right     |
+| ^              | Makes the pointer start moving up        |
+| v              | Makes the pointer start moving down      |
+| .              | go to the next character                 |
+| ,              | pops value from stack and prints it.     |
+| 1-9            | pushes corresponding value to stack      |
+| /, *, +, or -  | pop two values from stack (a, then b), and then performs the operation on a and b and pushes result to stack.|
+| I              | (CAPITAL I) gets a number or character from user, and pushes it to the stack.                                |
+<nvm>
 Table of functions
 ## Roadmap
-* At some point, it would be AMAZING if this was eventually a
-compiled language, but as of right now, it will not be compiled.
-  * (or an interpreter written in a more portable
-  language, instead of being interpreted to be interpreted.)
+* At some point, it would be AMAZING if this had an t=interpreter in a compiled
+language (instead of being interpreted to be interpreted).
 * ~~up and down movement of cursor~~ <- completed
 * interactive REPL would be awesome
 * a [tulip](https://tulip.computer) port

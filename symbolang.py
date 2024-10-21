@@ -88,18 +88,94 @@ class Symbolang:
             #print(self.direction, end=' ')
 
         elif self.item == '.':
-            print('next-char', end=' ')
+            #print('next-char', end=' ')
+            pass
 
         elif self.item == ',':
             print(self.stack_pop())
-            print(self.stack)
+            #print(self.stack)
+
+        #elif self.item == ',n':
+            #print(self.stack_pop(), end='')
+
+
+        ### NUMBERS
+        #I have to do it manually b/c idk how to automate it lol
+        elif self.item == '0':
+            #print(1, end=" ")
+            self.stack_push(0)
+
 
         elif self.item == '1':
             #print(1, end=" ")
             self.stack_push(1)
 
-        elif self.item == 'e':
-            self.throw_error('Reached end of program.')
+        elif self.item == '2':
+            #print(1, end=" ")
+            self.stack_push(2)
+
+        elif self.item == '3':
+            #print(1, end=" ")
+            self.stack_push(3)
+
+        elif self.item == '4':
+            #print(1, end=" ")
+            self.stack_push(4)
+
+        elif self.item == '5':
+            #print(1, end=" ")
+            self.stack_push(5)
+
+        elif self.item == '6':
+            #print(1, end=" ")
+            self.stack_push(6)
+
+        elif self.item == '7':
+            #print(1, end=" ")
+            self.stack_push(7)
+
+        elif self.item == '8':
+            #print(1, end=" ")
+            self.stack_push(8)
+
+        elif self.item == '9':
+            #print(1, end=" ")
+            self.stack_push(9)
+
+        ## Math
+
+        elif self.item == '+':
+            a = self.stack_pop()
+            b = self.stack_pop()
+            self.stack_push(a+b)
+
+        elif self.item == '-':
+            a = self.stack_pop()
+            b = self.stack_pop()
+            self.stack_push(a-b)
+
+        elif self.item == '*':
+            a = self.stack_pop()
+            b = self.stack_pop()
+            self.stack_push(a*b)
+
+        elif self.item == '/':
+            a = self.stack_pop()
+            b = self.stack_pop()
+            self.stack_push(a/b)
+
+        elif self.item == 'I':
+            a = input()
+            try:
+                self.stack_push(int(a))
+            except ValueError:
+                try:
+                    self.stack_push(ord(a))
+                except TypeError:
+                    self.throw_error(f'sorry, only one character input, please. (error at {self.x}, {self.y})')
+
+        elif self.item == '@':
+            self.throw_error('exiting...')
 
         else:
             self.throw_error(f'ERROR! Unrecognised character! at char {self.x+1} and line {self.y+1}')
@@ -108,6 +184,7 @@ class Symbolang:
     def throw_error(self, error):
         print(error)
         quit()
+
 
 
     def file_to_source_code(self, file):
@@ -146,4 +223,7 @@ if __name__ == '__main__':
         Symbolang(sys.argv[1])
     except IndexError:
         print('You have to specify a file to open!!')
+        quit()
+    except ZeroDivisionError:
+        print("lol don't divide by zero")
         quit()
