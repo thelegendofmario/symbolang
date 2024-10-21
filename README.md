@@ -28,7 +28,7 @@ There aren't really any variables, but you are able to push and pop values to an
 
 Table of functions
 ## Roadmap
-* At some point, it would be AMAZING if this had an t=interpreter in a compiled
+* At some point, it would be AMAZING if this had an interpreter in a compiled
 language (instead of being interpreted to be interpreted).
 * ~~up and down movement of cursor~~ <- completed
 * interactive REPL would be awesome
