@@ -1,41 +1,58 @@
-import sys
+import sys, random, time
 
 #source = 'hello.symb'
 
 class Symbolang:
-    def __init__(self, source='none'):
+    def __init__(self, arg1, source='none'):
         self.y = 0
         self.x = 0
         self.direction='right'
         self.stack = []
+        self.stringmode = False
+
+
 
         self.running = False
-        if source != 'none':
-            self.file_to_source_code(source)
-        else:
-            while True:
-                #Repl()
-                possible_file = input("Symbolang REPL (type source file) >>")
-                try:
-                    self.file_to_source_code(possible_file)
-                except FileNotFoundError:
-                    self.throw_error("That's not a valid file!")
+        if arg1 == '--run':
+            if source != 'none':
+                self.file_to_source_code(source)
+            else:
+                pass
+                # while True:
+                #     #Repl()
+                #     possible_file = input("Symbolang REPL (type source file) >>")
+                #     try:
+                #         self.file_to_source_code(possible_file)
+                #     except FileNotFoundError:
+                #         self.throw_error("That's not a valid file!")
 
-    def start_run(self):
+        elif arg1 == '--debug':
+            if source != 'none':
+                self.file_to_source_code(source, debug=True)
+            else:
+                pass
+
+    def start_run(self, debug=False):
         self.direction = 'right'
         #print(self.cursor['dir'])
-        self.run_prgm()
+        if debug == True:
+            self.run_prgm(True)
+        else:
+            self.run_prgm(False)
 
-    def run_prgm(self):
+
+    def run_prgm(self, dbg):
         #for i in range(len(self.file_content[0])):
 
         self.running = True
         while self.running != False:
             try:
+
+
                 if self.direction == 'right' and self.running == True:
                     self.x += 1
                     self.item_check(self.file_content[self.y][self.x])
-                    #print(self.file_content[self.y][self.x])
+                    if dbg == True: print(self.file_content[self.y][self.x])
 
 
                 elif self.x >= len(self.file_content[self.y]):
@@ -45,24 +62,35 @@ class Symbolang:
                 elif self.direction == 'left' and self.running == True:
                     self.x -= 1
                     self.item_check(self.file_content[self.y][self.x])
-                    #print(self.file_content[self.y][self.x])
+                    if dbg == True: print(self.file_content[self.y][self.x])
 
                 elif self.direction == 'down' and self.running == True:
                     self.y += 1
                     self.item_check(self.file_content[self.y][self.x])
-                    #print(self.file_content[self.y][self.x])
+                    if dbg == True: print(self.file_content[self.y][self.x])
 
                 elif self.direction == 'up' and self.running == True:
                     self.y -= 1
                     self.item_check(self.file_content[self.y][self.x])
-                    #print(self.file_content[self.y][self.x])
+                    if dbg == True: print(self.file_content[self.y][self.x])
 
 
                 elif self.y == len(self.file_content):
                     self.throw_error('reached end of line. exiting.')        #self.running = False
                     self.running = False
+
+                if dbg == True:
+                    time.sleep(0.5)
+
+
+
             except KeyboardInterrupt:
                 self.throw_error('\n\nGot keyboard interrupt, exiting program...')
+
+            else:
+                pass
+
+
             #for row in range(len(self.file_content)):
             #    for item in self.file_content[row]:
             #        self.item_check(item)
@@ -87,13 +115,22 @@ class Symbolang:
             self.direction = 'up'
             #print(self.direction, end=' ')
 
-        elif self.item == '.':
+        elif self.item == '?':
+            self.direction = random.choice(['up','down','left','right'])
+
+        elif self.item == 'p':
             #print('next-char', end=' ')
             pass
 
         elif self.item == ',':
-            print(self.stack_pop())
+            print(chr(self.stack_pop()))
             #print(self.stack)
+
+        elif self.item == '.':
+            print(self.stack_pop())
+
+        # elif self.item == '"':
+        #     self.stringmode = True
 
         #elif self.item == ',n':
             #print(self.stack_pop(), end='')
@@ -104,7 +141,6 @@ class Symbolang:
         elif self.item == '0':
             #print(1, end=" ")
             self.stack_push(0)
-
 
         elif self.item == '1':
             #print(1, end=" ")
@@ -187,7 +223,7 @@ class Symbolang:
 
 
 
-    def file_to_source_code(self, file):
+    def file_to_source_code(self, file, debug=False):
         self.source = file
         try:
             if list(self.source.split('.'))[1] !=  'symb':
@@ -208,7 +244,11 @@ class Symbolang:
         for line in self.file:
             self.file_content.append(list(line.split()))#.append('\n'))
 
-        self.start_run()
+
+        if debug == True:
+            self.start_run(debug=True)
+        else:
+            self.start_run()
         #print(self.file_content)
 
     def stack_push(self, value):
@@ -220,9 +260,9 @@ class Symbolang:
 
 if __name__ == '__main__':
     try:
-        Symbolang(sys.argv[1])
+        Symbolang(sys.argv[1], sys.argv[2])
     except IndexError:
-        print('You have to specify a file to open!!')
+        print('You have to specify a file to open!! and some arguments!!')
         quit()
     except ZeroDivisionError:
         print("lol don't divide by zero")
