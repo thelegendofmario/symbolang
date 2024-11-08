@@ -43,7 +43,8 @@ available arguments right now are `--run` or `--debug`.
 while `--run` just prints the output of the program.
 
 ## Changelog
-* Made a debug mode :) first real version of Symbolang, I feel like.
+* v0.1.0
+    * Made a debug mode. first real version of Symbolang, I feel like.
 
 ## Roadmap
 * At some point, it would be AMAZING if this had an interpreter in a compiled

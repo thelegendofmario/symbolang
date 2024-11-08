@@ -78,9 +78,12 @@ class Symbolang:
                 elif self.y == len(self.file_content):
                     self.throw_error('reached end of line. exiting.')        #self.running = False
                     self.running = False
-
+                
                 if dbg == True:
                     time.sleep(0.5)
+                    print(self.stringmode)
+                else:
+                    time.sleep(0.05)
 
 
 
@@ -99,38 +102,44 @@ class Symbolang:
 
     def item_check(self, item):
         self.item = item
-        if self.item == '>':
-            self.direction = 'right'
-            #print(self.direction, end=' ')
+        if self.stringmode == False:
+            if self.item == '>':
+                self.direction = 'right'
+                #print(self.direction, end=' ')
 
-        elif self.item == 'v':
-            self.direction = 'down'
-            #print(self.direction, end=' ')
+            elif self.item == 'v':
+                self.direction = 'down'
+                #print(self.direction, end=' ')
 
-        elif self.item == '<':
-            self.direction = 'left'
-            #print(self.direction, end=' ')
+            elif self.item == '<':
+                self.direction = 'left'
+                #print(self.direction, end=' ')
 
-        elif self.item == '^':
-            self.direction = 'up'
-            #print(self.direction, end=' ')
+            elif self.item == '^':
+                self.direction = 'up'
+                #print(self.direction, end=' ')
 
-        elif self.item == '?':
-            self.direction = random.choice(['up','down','left','right'])
+            elif self.item == '?':
+                self.direction = random.choice(['up','down','left','right'])
 
-        elif self.item == 'p':
-            #print('next-char', end=' ')
-            pass
+            elif self.item == 'p':
+                #print('next-char', end=' ')
+                pass
 
-        elif self.item == ',':
-            print(chr(self.stack_pop()))
-            #print(self.stack)
+            elif self.item == '_':
+                pass
 
-        elif self.item == '.':
-            print(self.stack_pop())
+            elif self.item == ',':
+                #sys.stdout.write(chr(self.stack_pop()))
+                print(chr(self.stack_pop()), end='', flush=True)
+                #print(self.stack)
 
-        # elif self.item == '"':
-        #     self.stringmode = True
+            elif self.item == '.':
+                print(self.stack_pop())
+
+            elif self.item == '"':
+                self.stringmode = True
+        
 
         #elif self.item == ',n':
             #print(self.stack_pop(), end='')
@@ -138,84 +147,92 @@ class Symbolang:
 
         ### NUMBERS
         #I have to do it manually b/c idk how to automate it lol
-        elif self.item == '0':
-            #print(1, end=" ")
-            self.stack_push(0)
+            elif self.item == '0':
+                #print(1, end=" ")
+                self.stack_push(0)
 
-        elif self.item == '1':
-            #print(1, end=" ")
-            self.stack_push(1)
+            elif self.item == '1':
+                #print(1, end=" ")
+                self.stack_push(1)
 
-        elif self.item == '2':
-            #print(1, end=" ")
-            self.stack_push(2)
+            elif self.item == '2':
+                #print(1, end=" ")
+                self.stack_push(2)
 
-        elif self.item == '3':
-            #print(1, end=" ")
-            self.stack_push(3)
+            elif self.item == '3':
+                #print(1, end=" ")
+                self.stack_push(3)
 
-        elif self.item == '4':
-            #print(1, end=" ")
-            self.stack_push(4)
+            elif self.item == '4':
+                #print(1, end=" ")
+                self.stack_push(4)
 
-        elif self.item == '5':
-            #print(1, end=" ")
-            self.stack_push(5)
+            elif self.item == '5':
+                #print(1, end=" ")
+                self.stack_push(5)
 
-        elif self.item == '6':
-            #print(1, end=" ")
-            self.stack_push(6)
+            elif self.item == '6':
+                #print(1, end=" ")
+                self.stack_push(6)
 
-        elif self.item == '7':
-            #print(1, end=" ")
-            self.stack_push(7)
+            elif self.item == '7':
+                #print(1, end=" ")
+                self.stack_push(7)
 
-        elif self.item == '8':
-            #print(1, end=" ")
-            self.stack_push(8)
+            elif self.item == '8':
+                #print(1, end=" ")
+                self.stack_push(8)
 
-        elif self.item == '9':
-            #print(1, end=" ")
-            self.stack_push(9)
+            elif self.item == '9':
+                #print(1, end=" ")
+                self.stack_push(9)
 
-        ## Math
+            ## Math
 
-        elif self.item == '+':
-            a = self.stack_pop()
-            b = self.stack_pop()
-            self.stack_push(a+b)
+            elif self.item == '+':
+                a = self.stack_pop()
+                b = self.stack_pop()
+                self.stack_push(a+b)
 
-        elif self.item == '-':
-            a = self.stack_pop()
-            b = self.stack_pop()
-            self.stack_push(a-b)
+            elif self.item == '-':
+                a = self.stack_pop()
+                b = self.stack_pop()
+                self.stack_push(a-b)
 
-        elif self.item == '*':
-            a = self.stack_pop()
-            b = self.stack_pop()
-            self.stack_push(a*b)
+            elif self.item == '*':
+                a = self.stack_pop()
+                b = self.stack_pop()
+                self.stack_push(a*b)
 
-        elif self.item == '/':
-            a = self.stack_pop()
-            b = self.stack_pop()
-            self.stack_push(a/b)
+            elif self.item == '/':
+                a = self.stack_pop()
+                b = self.stack_pop()
+                self.stack_push(a/b)
 
-        elif self.item == 'I':
-            a = input()
-            try:
-                self.stack_push(int(a))
-            except ValueError:
+            elif self.item == 'I':
+                a = input()
                 try:
-                    self.stack_push(ord(a))
-                except TypeError:
-                    self.throw_error(f'sorry, only one character input, please. (error at {self.x}, {self.y})')
+                    self.stack_push(int(a))
+                except ValueError:
+                    try:
+                        self.stack_push(ord(a))
+                    except TypeError:
+                        self.throw_error(f'sorry, only one character input, please. (error at {self.x}, {self.y})')
 
-        elif self.item == '@':
-            self.throw_error('exiting...')
+            elif self.item == '@':
+                self.throw_error('exiting...')
 
-        else:
-            self.throw_error(f'ERROR! Unrecognised character! at char {self.x+1} and line {self.y+1}')
+            else:
+                self.throw_error(f'ERROR! Unrecognised character! at char {self.x+1} and line {self.y+1}')
+        else: 
+            if self.item == '"':
+                self.stringmode = False
+            
+            elif self.item == '|':
+                self.stack_push(ord(' '))
 
+            else:
+                self.stack_push(ord(self.item))
 
     def throw_error(self, error):
         print(error)
