@@ -3,9 +3,7 @@
 ## intro
 
 The main concept of a Symbolang program is a 'pointer'. the pointer is the
-imaginary cursor that executes each character one by one. (right now it
-just supports left and right direction for the pointer, but eventually,
-it will be able to move up and down too.)
+imaginary cursor that executes each character one by one.
 
 ## Variable scope
 
