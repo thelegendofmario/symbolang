@@ -52,7 +52,7 @@ class Symbolang:
                 if self.direction == 'right' and self.running == True:
                     self.x += 1
                     self.item_check(self.file_content[self.y][self.x])
-                    if dbg == True: print(self.file_content[self.y][self.x])
+                    if dbg == True: print(self.file_content[self.y][self.x]), print(self.stack)                    
 
 
                 elif self.x >= len(self.file_content[self.y]):
@@ -113,7 +113,7 @@ class Symbolang:
 
             elif self.item == '<':
                 self.direction = 'left'
-                #print(self.direction, end=' ')
+                # print(self.direction, end=' ')
 
             elif self.item == '^':
                 self.direction = 'up'
@@ -122,12 +122,15 @@ class Symbolang:
             elif self.item == '?':
                 self.direction = random.choice(['up','down','left','right'])
 
-            elif self.item == 'p':
+            elif self.item == ' ':
                 #print('next-char', end=' ')
                 pass
 
-            elif self.item == '_':
-                pass
+            elif self.item == 'h':
+                if self.stack_pop() == 0:
+                    self.direction = 'right'
+                else:
+                    self.direction = 'left'
 
             elif self.item == ',':
                 #sys.stdout.write(chr(self.stack_pop()))
@@ -228,9 +231,8 @@ class Symbolang:
             if self.item == '"':
                 self.stringmode = False
             
-            elif self.item == '|':
+            elif self.item == ' ':
                 self.stack_push(ord(' '))
-
             else:
                 self.stack_push(ord(self.item))
 
@@ -259,8 +261,9 @@ class Symbolang:
         #self.row =
 
         for line in self.file:
-            self.file_content.append(list(line.split()))#.append('\n'))
-
+            self.file_content.append(list(line))#.append('\n'))
+            
+        #print(self.file_content)
 
         if debug == True:
             self.start_run(debug=True)
