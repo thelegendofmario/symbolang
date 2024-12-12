@@ -49,6 +49,9 @@ while `--run` just prints the output of the program.
 ## Changelog
 * v0.1.0
     * Made a debug mode. first real version of Symbolang, I feel like.
+* v0.1.2
+    * HUGE quality of life upgrade :)
+    * programs usually looked like this: `> 0 . 0 <`, but now they look like this: `>0.0<`
 
 ## Roadmap
 * At some point, it would be AMAZING if this had an interpreter in a compiled

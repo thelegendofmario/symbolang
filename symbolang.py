@@ -33,7 +33,7 @@ class Symbolang:
                 pass
 
     def start_run(self, debug=False):
-        self.direction = 'right'
+        #self.direction = 'right'
         #print(self.cursor['dir'])
         if debug == True:
             self.run_prgm(True)
@@ -43,7 +43,7 @@ class Symbolang:
 
     def run_prgm(self, dbg):
         #for i in range(len(self.file_content[0])):
-
+        self.item_check(self.file_content[self.y][self.x])
         self.running = True
         while self.running != False:
             try:
