@@ -14,7 +14,8 @@ class Symbolang:
         if arg1:
             if source:
                 self.file_to_source_code(source, arg1)
-            else:
+        else:
+            if source:
                 self.file_to_source_code(source)
 
     def start_run(self, debug=False):
