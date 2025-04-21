@@ -1,6 +1,6 @@
 [project]
 name = "symbolang"
-version = "0.1.3"
+version = "0.1.3.post1"
 description = "A simple 2D programming language."
 readme = "README.md"
 authors = [
