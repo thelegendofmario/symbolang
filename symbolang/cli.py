@@ -1,12 +1,16 @@
 from . import symbolang
-import sys
+import sys, argparse
+
+parser = argparse.ArgumentParser(
+    prog="symbolang",
+    description="a simple 2d programming language.",
+    epilog="filler text"
+)
+
+parser.add_argument("filename")
+parser.add_argument("-d", "--debug", action='store_true')
+
+args = parser.parse_args()
 
 def main():
-    try:
-        symbolang.Symbolang(sys.argv[1], sys.argv[2])
-    except IndexError:
-        print('You have to specify a file to open!! and some arguments!!')
-        quit()
-    except ZeroDivisionError:
-        print("lol don't divide by zero")
-        quit()
+    symbolang.run(args)

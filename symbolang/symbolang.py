@@ -1,6 +1,14 @@
-import sys, random, time
+import sys, random, time, argparse
 
 #source = 'hello.symb'
+# parser = argparse.ArgumentParser(
+#     prog="symbolang",
+#     description="a simple 2d programming language.",
+#     epilog="filler text"
+# )
+
+# parser.add_argument("filename")
+# parser.add_argument("-d", "--debug", action='store_true')
 
 class Symbolang:
     def __init__(self, arg1, source='none'):
@@ -13,7 +21,7 @@ class Symbolang:
 
 
         self.running = False
-        if arg1 == '--run':
+        if arg1 == False:
             if source != 'none':
                 self.file_to_source_code(source)
             else:
@@ -26,9 +34,9 @@ class Symbolang:
                 #     except FileNotFoundError:
                 #         self.throw_error("That's not a valid file!")
 
-        elif arg1 == '--debug':
+        elif arg1 == True:
             if source != 'none':
-                self.file_to_source_code(source, debug=True)
+                self.file_to_source_code(source, arg1)
             else:
                 pass
 
@@ -278,9 +286,11 @@ class Symbolang:
         return self.stack.pop()
 
 
-def run():
+
+def run(a):
     try:
-        Symbolang(sys.argv[1], sys.argv[2])
+        print("does this work?")
+        Symbolang(a.debug, a.filename)
     except IndexError:
         print('You have to specify a file to open!! and some arguments!!')
         quit()
