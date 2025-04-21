@@ -13,6 +13,7 @@ This is a stack based language, (at least for now)
 There aren't really any variables, but you are able to push and pop values to and from the stack.
 
 ## Syntax
+
 | Symbol | Function |
 |----------------|------------------------------------------|
 | >              | Makes the pointer start moving left |
@@ -38,7 +39,11 @@ There aren't really any variables, but you are able to push and pop values to an
 Table of functions
 
 ## Use
-simply clone the repo, `git clone https://github.com/thelegendofmario/symbolang.git`,
+You've read about this amazing program, but how do you use it? 
+first, install `pip` or similar.
+then, you can run `pip install symbolang` to install it.
+
+
 then, place your `.symb` file into the directory, and in your terminal, type
 `symbolang [argument] [your-file-here]`.
 
