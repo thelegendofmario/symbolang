@@ -1,8 +1,9 @@
 # Symbolang
 ### a 2-dimensional, interpreted, programming language, inspired by [befunge](https://esolangs.org/wiki/Befunge)
+
 ## intro
 
-The main concept of a Symbolang program is a 'pointer'. the pointer is the
+The main concept of a Symbolang program is the 'pointer'. the pointer is the
 imaginary cursor that executes each character one by one.
 
 ## Variable scope
@@ -39,19 +40,19 @@ Table of functions
 ## Use
 simply clone the repo, `git clone https://github.com/thelegendofmario/symbolang.git`,
 then, place your `.symb` file into the directory, and in your terminal, type
-`python3 symbolang.py [argument] [your-file-here]`.
+`symbolang [argument] [your-file-here]`.
 
 ### Arguments
-available arguments right now are `--run` or `--debug`.
-`--debug` runs the program but prints everything under the pointer,
-while `--run` just prints the output of the program.
+if you run it with `--debug`, it will print debug info. docs on what it displays coming soon!
 
 ## Changelog
 * v0.1.0
-    * Made a debug mode. first real version of Symbolang, I feel like.
+    * Made a debug mode. I feel like this is the first real version
 * v0.1.2
     * HUGE quality of life upgrade :)
     * programs usually looked like this: `> 0 . 0 <`, but now they look like this: `>0.0<`
+* v0.1.3
+    * now this can be run as an actual CLI app.
 
 ## Roadmap
 * At some point, it would be AMAZING if this had an interpreter in a compiled
