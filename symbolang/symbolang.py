@@ -278,7 +278,7 @@ class Symbolang:
         return self.stack.pop()
 
 
-if __name__ == '__main__':
+def run():
     try:
         Symbolang(sys.argv[1], sys.argv[2])
     except IndexError:
@@ -287,3 +287,6 @@ if __name__ == '__main__':
     except ZeroDivisionError:
         print("lol don't divide by zero")
         quit()
+
+if __name__ == '__main__':
+    run()
