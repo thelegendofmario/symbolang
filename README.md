@@ -21,14 +21,17 @@ There aren't really any variables, but you are able to push and pop values to an
 | ^              | Makes the pointer start moving up |
 | v              | Makes the pointer start moving down |
 | ?              | Random pointer direction |
-| h              | horizontal if statement; pops value from stack, if value is 0, set direction to right, if it's anything else set it to left. |
+| _              | horizontal if statement; pops value from stack, if value is 0, set direction to right, if it's anything else set it to left. |
+| \|              | horizontal if statement; pops value from stack, if value is 0, set direction to down, if it's anything else set it to up. |
 | "              | toggles stringmode. if on, every character's ascii value will be pushed to the stack. |
 |                | (single space) go to the next character |
 | ,              | pops value from stack and prints ascii character corresponding to that value.     |
 | .              | pops value from stack and prints it. |
 | 1-9            | pushes corresponding value to stack. |
 | /, *, +, or -  | pop two values from stack (a, then b), and then performs the operation on a and b and pushes result to stack.|
-| I              | (CAPITAL I) gets a number or character from user, and pushes it to the stack.                                |
+| ~              | gets a number or character from user, and pushes it to the stack. |
+
+##### Table of functions
 
 ### Example Program
 ```
@@ -36,7 +39,6 @@ There aren't really any variables, but you are able to push and pop values to an
 ^ ,,,,,,,,,,,,,, <
 ```
 
-Table of functions
 
 ## Use
 You've read about this amazing program, but how do you use it? 
@@ -62,6 +64,8 @@ if you run it with `--debug`, it will print debug info. docs on what it displays
 ## Roadmap
 * At some point, it would be AMAZING if this had an interpreter in a compiled
 language (instead of being interpreted to be interpreted).
+* full befunge clone coming soon.
+    * (and more after that)
 * ~~up and down movement of cursor~~ <- completed
 * interactive REPL would be awesome
 * a [tulip](https://tulip.computer) port

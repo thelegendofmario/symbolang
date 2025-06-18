@@ -19,7 +19,7 @@ class Symbolang:
                 self.file_to_source_code(source)
 
     def start_run(self, debug=False):
-        if debug == True:
+        if debug:
             self.run_prgm(True)
         else:
             self.run_prgm(False)
@@ -28,41 +28,41 @@ class Symbolang:
     def run_prgm(self, dbg):
         self.item_check(self.file_content[self.y][self.x])
         self.running = True
-        while self.running != False:
+        while not self.running:
             try:
 
 
-                if self.direction == 'right' and self.running == True:
+                if self.direction == 'right' and self.running:
                     self.x += 1
                     self.item_check(self.file_content[self.y][self.x])
-                    if dbg == True: print(self.file_content[self.y][self.x]), print(self.stack)                    
+                    if dbg: print(self.file_content[self.y][self.x]), print(self.stack)                    
 
 
                 elif self.x >= len(self.file_content[self.y]):
                     self.throw_error('reached end of line. exiting.')
                     self.running = False
 
-                elif self.direction == 'left' and self.running == True:
+                elif self.direction == 'left' and self.running:
                     self.x -= 1
                     self.item_check(self.file_content[self.y][self.x])
-                    if dbg == True: print(self.file_content[self.y][self.x])
+                    if dbg: print(self.file_content[self.y][self.x])
 
-                elif self.direction == 'down' and self.running == True:
+                elif self.direction == 'down' and self.running:
                     self.y += 1
                     self.item_check(self.file_content[self.y][self.x])
-                    if dbg == True: print(self.file_content[self.y][self.x])
+                    if dbg: print(self.file_content[self.y][self.x])
 
-                elif self.direction == 'up' and self.running == True:
+                elif self.direction == 'up' and self.running:
                     self.y -= 1
                     self.item_check(self.file_content[self.y][self.x])
-                    if dbg == True: print(self.file_content[self.y][self.x])
+                    if dbg: print(self.file_content[self.y][self.x])
 
 
                 elif self.y == len(self.file_content):
                     self.throw_error('reached end of line. exiting.')
                     self.running = False
                 
-                if dbg == True:
+                if dbg:
                     time.sleep(0.5)
                     print(self.stringmode)
                 else:
@@ -78,7 +78,7 @@ class Symbolang:
 
     def item_check(self, item):
         self.item = item
-        if self.stringmode == False:
+        if not self.stringmode:
             if self.item == '>':
                 self.direction = 'right'
 
@@ -97,12 +97,6 @@ class Symbolang:
             elif self.item == ' ':
                 pass
 
-            elif self.item == 'h':
-                if self.stack_pop() == 0:
-                    self.direction = 'right'
-                else:
-                    self.direction = 'left'
-
             elif self.item == ',':
                 print(chr(self.stack_pop()), end='', flush=True)
 
@@ -111,9 +105,38 @@ class Symbolang:
 
             elif self.item == '"':
                 self.stringmode = True
+
+            ###########
+            # Logic
+            ###########
+
+            elif self.item == '_':
+                if self.stack_pop() == 0:
+                    self.direction = 'right'
+                else:
+                    self.direction = 'left'
+
+            elif self.item == '|':
+                if self.stack_pop()==0:
+                    self.direction = 'down'
+                else:
+                    self.direction = 'up'
+
+            elif self.item == '!':
+                if self.stack_pop() == 0:
+                    self.stack_push(1)
+                else:
+                    self.stack_push(0)
+
+            elif self.item == '`':
+                a = self.stack_pop()
+                b = self.stack_pop()
+                self.stack_push(1 if b>a else 0)
+
+
         
         ###############
-        ### NUMBERS
+        ### Numbers
         # I have to do it manually b/c idk how to automate it lol ;)
         ##############
 
@@ -169,7 +192,7 @@ class Symbolang:
             elif self.item == '-':
                 a = self.stack_pop()
                 b = self.stack_pop()
-                self.stack_push(a-b)
+                self.stack_push(b-a)
 
             elif self.item == '*':
                 a = self.stack_pop()
@@ -179,9 +202,28 @@ class Symbolang:
             elif self.item == '/':
                 a = self.stack_pop()
                 b = self.stack_pop()
-                self.stack_push(a/b)
+                self.stack_push(b/a)
 
-            elif self.item == 'I':
+            elif self.item == '%':
+                a = self.stack_pop()
+                b = self.stack_pop()
+                self.stack_push(b%a)
+
+            # Misc
+            
+            elif self.item == ':':
+                a = self.stack_pop()
+                self.stack_push(a)
+                self.stack_push(a)
+
+
+            elif self.item == '\\':
+                a = self.stack_pop()
+                b = self.stack_pop()
+                self.stack_push(b)
+                self.stack_push(a)
+
+            elif self.item == '~':
                 a = input()
                 try:
                     self.stack_push(int(a))
@@ -229,7 +271,7 @@ class Symbolang:
             self.file_content.append(list(line))
             
 
-        if debug == True:
+        if debug:
             self.start_run(debug=True)
         else:
             self.start_run()
